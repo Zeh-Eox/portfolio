@@ -1,23 +1,45 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+}
+
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+}
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [focusedField, setFocusedField] = useState(null);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   // Animation subtile pour les particules d'arrière-plan
-  const [particles, setParticles] = useState(Array(5).fill().map(() => ({
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: 30 + Math.random() * 50,
-  })));
+  const [particles, setParticles] = useState<Particle[]>(
+    Array(5).fill(null).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 30 + Math.random() * 50,
+    }))
+  );
 
   // Animation des particules
   useEffect(() => {
@@ -31,7 +53,7 @@ const Contact = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -39,15 +61,15 @@ const Contact = () => {
     }));
 
     // Effacer l'erreur quand l'utilisateur commence à taper
-    if (errors[name]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
-        [name]: null
+        [name]: undefined
       }));
     }
   };
 
-  const handleFocus = (field) => {
+  const handleFocus = (field: string) => {
     setFocusedField(field);
   };
 
@@ -55,8 +77,8 @@ const Contact = () => {
     setFocusedField(null);
   };
 
-  const validate = () => {
-    const newErrors = {};
+  const validate = (): boolean => {
+    const newErrors: FormErrors = {};
     
     if (!formData.name.trim()) {
       newErrors.name = 'Le nom est requis';
@@ -80,7 +102,7 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (validate()) {
@@ -165,7 +187,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-white/80">Email</h4>
-                    <p className="mt-1">email@test.com</p>
+                    <p className="mt-1">contact@arnoldconvolbo.com</p>
                   </div>
                 </div>
                 
@@ -189,7 +211,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-white/80">Localisation</h4>
-                    <p className="mt-1">Ouagadougou, Burkina Faso</p>
+                    <p className="mt-1">Paris, France</p>
                   </div>
                 </div>
               </div>
