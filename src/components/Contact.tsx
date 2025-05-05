@@ -174,7 +174,7 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto bg-gray-900/50 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
             {/* Informations de contact */}
-            <div className="w-full md:w-2/5 bg-gradient-to-br from-blue-600/90 to-purple-600/90 p-8 text-white">
+            <div className="w-full md:w-2/5 bg-gradient-to-br from-blue-500/90 to-purple-500/90 p-8 text-white">
               <h3 className="text-2xl font-bold mb-6">Informations de contact</h3>
               
               <div className="space-y-6 mt-8">
