@@ -72,7 +72,7 @@ const Hero = () => {
             
             <div className="flex flex-wrap gap-4">
               <a 
-                href="/cv.pdf" 
+                href="/files/cv.pdf" 
                 download 
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full font-medium shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:translate-y-1 transition-all duration-300 flex items-center gap-2"
               >
