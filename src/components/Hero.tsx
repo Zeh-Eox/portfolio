@@ -133,7 +133,7 @@ const Hero = () => {
         </div>
 
         <div className="mt-12">
-          <p className="text-gray-400 mb-6 font-medium">Compétences</p>
+          <p className="text-gray-400 mb-6 font-medium">Technologies Utilisées</p>
 
           {/* Version Desktop - Animation défilement */}
           <div className="hidden md:block overflow-hidden relative py-4">
